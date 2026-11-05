@@ -44,22 +44,23 @@ import HomeTopics from "./HomeTopics.vue";
   background-position: center;
   filter: blur(8px) saturate(1.05);
   transform: scale(1.15);
-  transition: filter 0.35s ease;
-}
-
-.home-content:hover .home-content__bg {
-  filter: blur(8px) brightness(0.55) saturate(1.05);
+  /* Яркость/blur больше не анимируются — filter-переходы на большом
+     background-image дёргаются в браузере. Затемнение делает только
+     отдельный слой-оверлей ниже, анимируя исключительно opacity —
+     это дешёво для браузера и идёт гладко. */
 }
 
 .home-content__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(8, 6, 3, 0);
-  transition: background 0.35s ease;
+  background: rgba(8, 6, 3, 0.45);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  will-change: opacity;
 }
 
 .home-content:hover .home-content__overlay {
-  background: rgba(8, 6, 3, 0.4);
+  opacity: 1;
 }
 
 /* При наведении на всю область карточки дополнительно "проявляются" —
@@ -68,6 +69,7 @@ import HomeTopics from "./HomeTopics.vue";
 .home-content:hover :deep(.home-topics__card) {
   background: rgba(20, 14, 6, 0.65);
   border-color: rgba(255, 255, 255, 0.32);
+  transition: background 0.6s ease, border-color 0.6s ease, transform 0.2s;
 }
 
 .home-content__inner {
