@@ -104,16 +104,18 @@ const links: LinkItem[] = [
   gap: 12px;
   padding: 14px 16px;
   border-radius: 12px;
-  border: 1px solid var(--vp-c-divider);
-  background: var(--vp-c-bg-soft);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   text-decoration: none !important;
-  color: var(--vp-c-text-1);
+  color: #fff;
   transition: border-color 0.2s, transform 0.2s, background 0.2s;
 }
 
 a.useful-links__card:hover {
-  border-color: var(--vp-c-brand-1);
-  background: var(--vp-c-brand-soft);
+  border-color: #f0a644;
+  background: rgba(255, 255, 255, 0.13);
   transform: translateY(-2px);
 }
 
@@ -132,6 +134,7 @@ a.useful-links__card:hover {
 
 .useful-links__text strong {
   font-size: 14px;
+  color: #fff;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -145,20 +148,25 @@ a.useful-links__card:hover {
   letter-spacing: 0.02em;
   padding: 1px 6px;
   border-radius: 999px;
-  background: var(--vp-c-brand-soft);
-  color: var(--vp-c-brand-1);
+  background: rgba(240, 166, 68, 0.25);
+  color: #ffd79a;
   white-space: nowrap;
 }
 
 .useful-links__text small {
   font-size: 12px;
-  color: var(--vp-c-text-2);
+  color: rgba(255, 255, 255, 0.72);
   overflow-wrap: anywhere;
+}
+
+.useful-links__text small code {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
 }
 
 .useful-links__arrow {
   margin-left: auto;
-  color: var(--vp-c-brand-1);
+  color: #f0a644;
   opacity: 0;
   transform: translateX(-4px);
   transition: opacity 0.2s, transform 0.2s;
@@ -171,7 +179,7 @@ a.useful-links__card:hover .useful-links__arrow {
 }
 
 .useful-links__card--info {
-  background: var(--vp-c-brand-soft);
-  border-color: var(--vp-c-brand-1);
+  background: rgba(240, 166, 68, 0.14);
+  border-color: rgba(240, 166, 68, 0.5);
 }
 </style>
