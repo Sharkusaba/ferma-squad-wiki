@@ -42,14 +42,14 @@ import HomeTopics from "./HomeTopics.vue";
   background-image: url("/assets/ferma-squad-banner.gif");
   background-size: cover;
   background-position: center;
-  filter: blur(22px) brightness(0.28) saturate(0.9);
+  filter: blur(14px) brightness(0.68) saturate(1.05);
   transform: scale(1.15);
 }
 
 .home-content__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(8, 6, 3, 0.45);
+  background: rgba(8, 6, 3, 0.22);
 }
 
 .home-content__inner {
