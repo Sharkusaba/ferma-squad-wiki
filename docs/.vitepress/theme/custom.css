@@ -1,0 +1,86 @@
+/**
+ * Тёплая оранжево-жёлтая палитра (цвет пшеничных колосьев) вместо
+ * стандартной зелёной темы VitePress. Переопределяет CSS-переменные темы —
+ * если захотите другой оттенок, меняйте значения ниже, больше нигде не нужно.
+ */
+
+:root {
+  /* Основной акцентный цвет (ссылки, кнопки, выделения) */
+  --vp-c-brand-1: #d97a1f;
+  --vp-c-brand-2: #c6690f;
+  --vp-c-brand-3: #a85708;
+  --vp-c-brand-soft: rgba(217, 122, 31, 0.14);
+
+  /* Кнопка «brand» на главной странице (Hero) */
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-bg: #d97a1f;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-hover-bg: #c6690f;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: #ffffff;
+  --vp-button-brand-active-bg: #a85708;
+}
+
+.dark {
+  --vp-c-brand-1: #f0a644;
+  --vp-c-brand-2: #e8943a;
+  --vp-c-brand-3: #d97a1f;
+  --vp-c-brand-soft: rgba(240, 166, 68, 0.16);
+}
+
+/* Градиент имени на главной странице (Hero name) — тёплый золотисто-оранжевый */
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #e8c158 10%, #d97a1f 60%);
+}
+
+/* Мягкое оранжевое свечение фона на главной странице */
+:root {
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    #f0c060 30%,
+    #d97a1f 60%
+  );
+  --vp-home-hero-image-filter: blur(56px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
+}
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(84px);
+  }
+}
+
+/*
+ * Логотип в шапке сайта — исходная гифка квадратная (с кругом внутри,
+ * как аватар Discord), поэтому обрезаем её в круг прямо в браузере.
+ */
+.VPNavBarTitle .logo,
+.VPSidebarNav .logo {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+/*
+ * ПРОВЕРКА: если на сайте в правом нижнем углу появилась маленькая
+ * оранжевая точка — значит custom.css подхватился корректно.
+ * Когда убедитесь, что цвета и баннер применились, удалите этот блок.
+ */
+body::after {
+  content: "";
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #d97a1f;
+  z-index: 9999;
+  pointer-events: none;
+}
