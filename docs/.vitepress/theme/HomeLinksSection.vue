@@ -42,14 +42,32 @@ import HomeTopics from "./HomeTopics.vue";
   background-image: url("/assets/ferma-squad-banner.gif");
   background-size: cover;
   background-position: center;
-  filter: blur(14px) brightness(0.68) saturate(1.05);
+  filter: blur(8px) saturate(1.05);
   transform: scale(1.15);
+  transition: filter 0.35s ease;
+}
+
+.home-content:hover .home-content__bg {
+  filter: blur(8px) brightness(0.55) saturate(1.05);
 }
 
 .home-content__overlay {
   position: absolute;
   inset: 0;
-  background: rgba(8, 6, 3, 0.22);
+  background: rgba(8, 6, 3, 0);
+  transition: background 0.35s ease;
+}
+
+.home-content:hover .home-content__overlay {
+  background: rgba(8, 6, 3, 0.4);
+}
+
+/* При наведении на всю область карточки дополнительно "проявляются" —
+   ярче подложка и контрастнее рамка, поверх уже общего затемнения фона. */
+.home-content:hover :deep(.useful-links__card),
+.home-content:hover :deep(.home-topics__card) {
+  background: rgba(20, 14, 6, 0.65);
+  border-color: rgba(255, 255, 255, 0.32);
 }
 
 .home-content__inner {
