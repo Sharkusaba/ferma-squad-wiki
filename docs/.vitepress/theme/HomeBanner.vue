@@ -1,7 +1,9 @@
 <template>
   <div class="home-banner">
+    <div class="home-banner__blur" aria-hidden="true" />
+    <div class="home-banner__overlay" aria-hidden="true" />
     <img
-      class="home-banner__bg"
+      class="home-banner__fg"
       src="/assets/ferma-squad-banner.gif"
       alt="FermaSquad"
     />
@@ -10,30 +12,48 @@
 
 <style scoped>
 /*
- * Гифка хранится локально (docs/public/assets) и имеет исходное разрешение
- * 1024×585. Раньше баннер растягивал её по всей ширине экрана (нередко
- * 1400-1900px) через object-fit: cover, то есть апскейлил в 1.5-2 раза —
- * отсюда и "замыленность". Теперь ширина баннера ограничена шириной
- * исходника (max-width), апскейла нет; на экранах уже исходника гифка
- * просто вписывается по ширине без обрезки сверху/снизу.
+ * Полноширинный, но невысокий баннер: сама гифка показывается на всю высоту
+ * без обрезки (object-fit: contain), а по бокам, где остаётся пустое место
+ * из-за несовпадения пропорций с шириной экрана, — размытая увеличенная
+ * копия той же гифки с полупрозрачной тёмной "рамкой" поверх. Так на любой
+ * ширине экрана нет ни чёрных полос, ни искажения/растяжения картинки.
  */
 .home-banner {
+  position: relative;
   width: 100%;
-  max-width: 1024px;
-  margin: 0 auto -16px; /* чуть "подныриваем" под следующий hero-блок темы */
+  height: clamp(110px, 15vw, 190px);
   overflow: hidden;
-  border-radius: 0 0 20px 20px;
+  margin-bottom: -16px; /* чуть "подныриваем" под следующий hero-блок темы */
 }
 
-.home-banner__bg {
+.home-banner__blur {
+  position: absolute;
+  inset: -24px; /* чуть больше контейнера, чтобы размытый край не был виден */
+  background-image: url("/assets/ferma-squad-banner.gif");
+  background-size: cover;
+  background-position: center;
+  filter: blur(26px) saturate(1.15) brightness(0.9);
+  transform: scale(1.12);
+}
+
+.home-banner__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 14, 6, 0.32);
+}
+
+.home-banner__fg {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .home-banner {
-    border-radius: 0;
+    height: 140px;
   }
 }
 </style>

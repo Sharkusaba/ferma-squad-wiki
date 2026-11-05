@@ -1,38 +1,57 @@
 <script setup lang="ts">
 interface LinkItem {
+  type: "link" | "info";
   icon: string;
   title: string;
   desc: string;
-  href: string;
+  href?: string;
   badge?: string;
 }
 
+/*
+ * Порядок карточек осмысленный, не произвольный:
+ * 1) Наш Discord — главный призыв к действию (вступить).
+ * 2) IP сервера и карта — сразу всё, чтобы зайти и поиграть.
+ * 3) Ресурсы всего проекта DailyMine (не наши, общие для всех сквадов).
+ * 4) Необязательное (моды) — в самом конце.
+ */
 const links: LinkItem[] = [
   {
-    icon: "🗺️",
-    title: "Карта сервера",
-    desc: "Интерактивная карта мира DailyMine",
-    href: "https://wp.dailymine.net/#world;flat;12132,64,-11880;1",
-  },
-  {
+    type: "link",
     icon: "💬",
     title: "Discord FermaSquad",
     desc: "Наш сквад — вечная пригласительная ссылка",
     href: "https://discord.gg/fermasquad",
   },
   {
-    icon: "🌐",
-    title: "Discord DailyMine",
-    desc: "Discord-сервер самого проекта DailyMine",
-    href: "https://discord.gg/kWxMknvqpC",
+    type: "info",
+    icon: "🖥️",
+    title: "IP сервера",
+    desc: "mc.dailymine.net · версия 1.21.11",
   },
   {
+    type: "link",
+    icon: "🗺️",
+    title: "Карта сервера",
+    desc: "Интерактивная карта мира DailyMine",
+    href: "https://wp.dailymine.net/#world;flat;12132,64,-11880;1",
+  },
+  {
+    type: "link",
     icon: "📖",
     title: "Вики DailyMine",
     desc: "База знаний проекта DailyMine (не наша вики)",
     href: "https://wiki.dailymine.net/",
   },
   {
+    type: "link",
+    icon: "🌐",
+    title: "Discord DailyMine",
+    desc: "Discord-сервер самого проекта DailyMine",
+    href: "https://discord.gg/kWxMknvqpC",
+  },
+  {
+    type: "link",
     icon: "🧩",
     title: "Моды для игры",
     desc: "Рекомендательная подборка — к установке не обязательна",
@@ -45,13 +64,13 @@ const links: LinkItem[] = [
 <template>
   <div class="useful-links">
     <div class="useful-links__grid">
-      <a
+      <component
+        :is="l.type === 'link' ? 'a' : 'div'"
         v-for="l in links"
-        :key="l.href"
+        :key="l.title"
         class="useful-links__card"
-        :href="l.href"
-        target="_blank"
-        rel="noopener"
+        :class="{ 'useful-links__card--info': l.type === 'info' }"
+        v-bind="l.type === 'link' ? { href: l.href, target: '_blank', rel: 'noopener' } : {}"
       >
         <span class="useful-links__icon">{{ l.icon }}</span>
         <span class="useful-links__text">
@@ -59,18 +78,11 @@ const links: LinkItem[] = [
             {{ l.title }}
             <span v-if="l.badge" class="useful-links__badge">{{ l.badge }}</span>
           </strong>
-          <small>{{ l.desc }}</small>
+          <small v-if="l.type === 'info'"><code>mc.dailymine.net</code> · версия <code>1.21.11</code></small>
+          <small v-else>{{ l.desc }}</small>
         </span>
-        <span class="useful-links__arrow">⩥</span>
-      </a>
-
-      <div class="useful-links__card useful-links__card--ip">
-        <span class="useful-links__icon">🖥️</span>
-        <span class="useful-links__text">
-          <strong>IP сервера</strong>
-          <small><code>mc.dailymine.net</code> · версия <code>1.21.11</code></small>
-        </span>
-      </div>
+        <span v-if="l.type === 'link'" class="useful-links__arrow">⩥</span>
+      </component>
     </div>
   </div>
 </template>
@@ -158,7 +170,7 @@ a.useful-links__card:hover .useful-links__arrow {
   transform: translateX(0);
 }
 
-.useful-links__card--ip {
+.useful-links__card--info {
   background: var(--vp-c-brand-soft);
   border-color: var(--vp-c-brand-1);
 }
