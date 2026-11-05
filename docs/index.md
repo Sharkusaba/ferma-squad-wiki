@@ -16,7 +16,7 @@ hero:
 features:
   - icon: 🌾
     title: О нас
-    details: Кто такой FermaSquad, что за сервер DailyMine, правила и армейский устав.
+    details: Кто такие FermaSquad, что за сервер DailyMine, правила и армейский устав.
     link: /o-nas/
   - icon: 🧭
     title: Новичкам
@@ -35,7 +35,3 @@ features:
     details: Полный список команд и ответы на частые вопросы по боту.
     link: /bot/komandy
 ---
-
-## 🔗 Полезные ссылки
-
-<UsefulLinks />

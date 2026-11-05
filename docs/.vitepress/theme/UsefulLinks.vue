@@ -4,6 +4,7 @@ interface LinkItem {
   title: string;
   desc: string;
   href: string;
+  badge?: string;
 }
 
 const links: LinkItem[] = [
@@ -16,26 +17,27 @@ const links: LinkItem[] = [
   {
     icon: "💬",
     title: "Discord FermaSquad",
-    desc: "Вечная пригласительная ссылка",
+    desc: "Наш сквад — вечная пригласительная ссылка",
     href: "https://discord.gg/fermasquad",
   },
   {
-    icon: "✉️",
-    title: "Написать нам в Discord",
-    desc: "Личные сообщения / поддержка",
+    icon: "🌐",
+    title: "Discord DailyMine",
+    desc: "Discord-сервер самого проекта DailyMine",
     href: "https://discord.gg/kWxMknvqpC",
   },
   {
     icon: "📖",
-    title: "Вики",
-    desc: "Вы сейчас здесь",
+    title: "Вики DailyMine",
+    desc: "База знаний проекта DailyMine (не наша вики)",
     href: "https://wiki.dailymine.net/",
   },
   {
     icon: "🧩",
     title: "Моды для игры",
-    desc: "Сборка модов, Google Drive",
+    desc: "Рекомендательная подборка — к установке не обязательна",
     href: "https://drive.google.com/drive/folders/1brm-CdtU0TZab8DgIRw5HP1o_WCIm5RP",
+    badge: "необязательно",
   },
 ];
 </script>
@@ -53,7 +55,10 @@ const links: LinkItem[] = [
       >
         <span class="useful-links__icon">{{ l.icon }}</span>
         <span class="useful-links__text">
-          <strong>{{ l.title }}</strong>
+          <strong>
+            {{ l.title }}
+            <span v-if="l.badge" class="useful-links__badge">{{ l.badge }}</span>
+          </strong>
           <small>{{ l.desc }}</small>
         </span>
         <span class="useful-links__arrow">⩥</span>
@@ -72,7 +77,7 @@ const links: LinkItem[] = [
 
 <style scoped>
 .useful-links {
-  margin: 24px 0 40px;
+  margin: 0;
 }
 
 .useful-links__grid {
@@ -115,6 +120,22 @@ a.useful-links__card:hover {
 
 .useful-links__text strong {
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.useful-links__badge {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  white-space: nowrap;
 }
 
 .useful-links__text small {
