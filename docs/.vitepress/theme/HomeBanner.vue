@@ -6,12 +6,6 @@
       alt=""
       aria-hidden="true"
     />
-    <div class="home-banner__shade" />
-    <img
-      class="home-banner__mascot"
-      src="https://allwebs.ru/images/2026/11/05/94737279360d79a98b5ab19660ad484f.png"
-      alt="Маскот Ferma Squad на стоге сена — добро пожаловать в сквад"
-    />
   </div>
 </template>
 
