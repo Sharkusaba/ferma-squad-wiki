@@ -51,32 +51,17 @@ npm run dev
 
 Откроется адрес вида `http://localhost:5173`.
 
-## Деплой на GitHub Pages
+## Деплой на Cloudflare Pages
 
-Сборка настроена через GitHub Actions (`.github/workflows/deploy.yml`) — она сама запускается при каждом пуше в ветку `main` и ничего вручную собирать не нужно.
+1. Залейте этот проект в репозиторий на GitHub (или GitLab).
+2. В Cloudflare Dashboard → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**, выберите репозиторий.
+3. Настройки сборки:
+   - **Framework preset**: VitePress (если нет в списке — настройте вручную, см. ниже)
+   - **Build command**: `npm run build`
+   - **Build output directory**: `docs/.vitepress/dist`
+4. Нажмите **Save and Deploy**.
 
-1. Залейте этот проект в репозиторий на GitHub.
-2. В репозитории откройте **Settings → Pages**.
-3. В разделе **Build and deployment** → **Source** выберите **GitHub Actions** (не «Deploy from a branch»).
-4. Сделайте любой пуш в `main` (или зайдите во вкладку **Actions** и запустите workflow «Deploy wiki to GitHub Pages» вручную — кнопка **Run workflow**).
-5. Через 1–2 минуты сайт будет доступен по адресу вида `https://ВАШ_АККАУНТ.github.io/ИМЯ_РЕПОЗИТОРИЯ/`.
-
-### Подключение домена fermasquad.online
-
-В проекте уже лежит файл `docs/public/CNAME` с доменом `fermasquad.online` — GitHub Pages подхватит его автоматически при сборке. Остаётся два шага:
-
-1. **На GitHub**: Settings → Pages → поле **Custom domain** → впишите `fermasquad.online` → Save. Поставьте галочку **Enforce HTTPS** (появится, когда сертификат будет готов — это может занять до суток).
-2. **У регистратора домена** (cp.sweb.ru): добавьте DNS-записи, которые просит GitHub —
-   - Если домен без `www` (голый `fermasquad.online`): 4 записи типа **A** на корень (`@`), указывающие на IP-адреса GitHub Pages:
-     ```
-     185.199.108.153
-     185.199.109.153
-     185.199.110.153
-     185.199.111.153
-     ```
-   - Если хотите, чтобы `www.fermasquad.online` тоже работал: добавьте запись **CNAME** с хоста `www` на `ВАШ_АККАУНТ.github.io`.
-
-DNS может обновляться от нескольких минут до суток. Актуальный список IP-адресов стоит сверить в [официальной документации GitHub](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site) — доверяйте значениям оттуда, если они будут отличаться от написанных выше.
+После этого при каждом пуше в ветку (обычно `main`) Cloudflare Pages будет пересобирать и обновлять сайт автоматически — отдельно ничего собирать не нужно.
 
 ### Редактирование прямо на GitHub
 
@@ -85,7 +70,7 @@ DNS может обновляться от нескольких минут до 
 1. Откройте нужный `.md` файл в репозитории на github.com.
 2. Нажмите иконку карандаша («Edit this file»).
 3. Внесите правки, внизу нажмите **Commit changes**.
-4. GitHub Actions автоматически пересоберёт и обновит сайт за 1–2 минуты — прогресс можно посмотреть во вкладке **Actions**.
+4. Cloudflare Pages автоматически пересоберёт сайт за 1–2 минуты.
 
 Ссылка «Редактировать эту страницу на GitHub» внизу каждой страницы ведёт туда же — не забудьте прописать свой репозиторий в `editLink.pattern` в `config.mts`.
 
