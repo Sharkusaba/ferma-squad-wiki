@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Ferma Squad — Вики",
   titleTemplate: ":title", // без этого VitePress сам дописывает "| VitePress" в заголовок вкладки
-  description: "База знаний сквада FermaSquad (Daily Mine)",
+  description: "База знаний сквада «Ферма склад» (Daily Mine)",
   lang: "ru-RU",
   lastUpdated: true,
   cleanUrls: true,
@@ -29,7 +29,6 @@ export default defineConfig({
 
     nav: [
       { text: "Главная", link: "/" },
-      { text: "О нас", link: "/o-nas/" },
       { text: "Новичкам", link: "/novichkam/registraciya" },
       { text: "Структура", link: "/struktura/ministerstva" },
       { text: "Гос. рейтинг", link: "/gos-reiting/kak-nachislyaetsya" },
@@ -37,15 +36,6 @@ export default defineConfig({
     ],
 
     sidebar: {
-      "/o-nas/": [
-        {
-          text: "О нас",
-          items: [
-            { text: "О нас и сервере", link: "/o-nas/" },
-            { text: "Правила и армейский устав", link: "/o-nas/pravila" },
-          ],
-        },
-      ],
       "/novichkam/": [
         {
           text: "Новичкам",
@@ -128,7 +118,7 @@ export default defineConfig({
     sidebarMenuLabel: "Меню",
 
     footer: {
-      message: "Вики сквада FermaSquad · Daily Mine",
+      message: "Вики сквада «Ферма склад» · Daily Mine",
       copyright: "",
     },
   },
